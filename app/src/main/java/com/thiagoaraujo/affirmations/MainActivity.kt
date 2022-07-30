@@ -3,6 +3,8 @@ package com.thiagoaraujo.affirmations
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.thiagoaraujo.affirmations.adapter.ItemAdapter
 import com.thiagoaraujo.affirmations.data.Datasource
 
 class MainActivity : AppCompatActivity() {
@@ -10,8 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView: TextView = findViewById(R.id.textView)
-        textView.text = Datasource().loadAffirmations().size.toString()
+        val myDataset = Datasource().loadAffirmations()
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.adapter = ItemAdapter(this, myDataset)
+        recyclerView.setHasFixedSize(true)
+
+
 
     }
 }
